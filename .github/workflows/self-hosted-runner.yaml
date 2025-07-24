@@ -1,0 +1,11 @@
+name: Run on Self-Hosted
+
+on: 
+    push
+
+jobs:
+  test-on-self-hosted:
+    runs-on: self-hosted  
+    steps:
+      - name: Print Hello
+        run: echo "Hello from self-hosted runner"
