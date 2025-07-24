@@ -5,8 +5,9 @@ on: #multiple events can trigger the workflow
         types: [opened] 
     schedule:
         - cron: '0 3 * * *'  
+    workflow_dispatch: 
 jobs:
-    first_job:
+    workflow_event_job:
         runs-on: ubuntu-latest
         steps:
             - run: echo "workflow_events"
