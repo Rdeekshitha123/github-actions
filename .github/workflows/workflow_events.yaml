@@ -1,0 +1,12 @@
+name: workflow_events
+on: #multiple events can trigger the workflow
+    push:
+    pull_request:
+        types: [opened] 
+    schedule:
+        - cron: '0 3 * * *'  
+jobs:
+    first_job:
+        runs-on: ubuntu-latest
+        steps:
+            - run: echo "workflow_events"
