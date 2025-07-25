@@ -10,8 +10,9 @@ jobs:
             name_job: "job-level-env001" #this variable is accessbile only with this job
         steps: 
             - name: Github context
-              run: echo "The workflow name is ${{github.workflow}} " 
-                   echo "The step level env is $name_step" # the way to access the step level env is just $step-variable
+              run: |
+                 echo "The workflow name is ${{github.workflow}} " 
+                 echo "The step level env is $name_step" # the way to access the step level env is just $step-variable
               env:
                 name_step: "step-level-env001" #this variable is accessible only within this step under the name github context
               
