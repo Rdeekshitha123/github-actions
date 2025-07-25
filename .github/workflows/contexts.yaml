@@ -10,12 +10,12 @@ jobs:
             name-job: "job-level-env001" #this variable is accessbile only with this job
         steps: 
             - name: Github context
-              run: echo "The workflow name is ${{github.workflow}} " 
+              run: echo "The workflow name is $github.workflow " 
                    echo "The step level env is $name-step" # the way to access the step level env is just $step-variable
               env:
-                name-step: "step-level-env001" #this variable is accessible only within this step under the name github context
+                name_step: "step-level-env001" #this variable is accessible only within this step under the name github context
               
             - name: env context at workflow level
-              run : echo "The env variable set at the workflow level ${{env.name}} "
+              run : echo "The env variable set at the workflow level $env.name "
             - name : env context at job level
-              run: echo "The env varible set at the job level ${{env.name-job}} "
+              run: echo "The env varible set at the job level $env.name-job "
