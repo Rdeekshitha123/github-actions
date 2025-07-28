@@ -1,0 +1,20 @@
+name: Functions
+on:
+    push
+jobs:
+    status-check-functions:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Success
+              if: ${{success()}}
+              run: echo "The step executed successfully"
+            - name: Failure
+              if: ${{failure()}}
+              run: echo "The step failed to execute"
+            - name: Cancelled
+              if: ${{cancelled()}}
+              run: echo "runs when the workflow is cancelled"
+            - name: !cancelled
+              if: ${{!cancelled()}}
+              run: echo "Runs even if the job runs successfully or fails, except when the workflow is cancelled"
+
