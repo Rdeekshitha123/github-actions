@@ -17,4 +17,24 @@ jobs:
             - name: not cancelled
               if: ${{ !cancelled() }}
               run: echo "Runs even if the job runs successfully or fails, except when the workflow is cancelled"
+    
+    built-in-functions:
+        runs-on: ubuntu-latest
+        steps:
+            - name: contains function
+              if: ${{ contains('Deekshitha','Dee') }}
+              run: echo "Dee substring is present"
+            - name: startWith function
+              if: ${{ startsWith('DevOn','Dev') }}
+              run: echo "Starts with Dev"
+            - name: endsWith function
+              if: ${{endsWith('DevOn','On')}}
+              run: echo "Endswith On"
+            - name: format function
+              run: echo "${{format('Hello {0}','Deekshitha')}}"
+            - name: join function and fromJSON function converting the string into a list
+              run: echo "${{join(fromJSON('["Deekshitha","Charan","Chandra"]'),',')}}"
+            - name: toJSON converts the string into json format
+              run: echo "${{toJSON(github)}}"
 
+ 
