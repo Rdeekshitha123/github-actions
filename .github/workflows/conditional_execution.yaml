@@ -1,0 +1,23 @@
+name: Conditional Execution
+on:
+    push
+jobs:
+    conditional-execution: #Independent job- which runs in parallel
+        if: ${{ github.ref == 'refs/heads/main' }}
+        runs-on: ubuntu-latest
+        steps:
+            - name: Conditional execution
+              run: echo "The condition is checked and then the steps under the job is executed if the condition it holds is true, this is job level execution"
+            - name: Step level conditional execution
+              if: ${{success()}}
+              run: echo "This is step level execution and runs when the previous step runs successfully"
+    sequential-job-execution:
+        runs-on: ubuntu-latest
+        needs:
+            - conditional-execution  #This job is dependent on the previous job to get completed and waits for it to execute
+        steps:
+            - name: sequential execution
+              run: echo "This current job is dependent on the previous job to execute and waits until it completes and then execute"
+
+
+
