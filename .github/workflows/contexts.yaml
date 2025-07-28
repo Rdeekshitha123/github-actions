@@ -20,3 +20,5 @@ jobs:
               run : echo "The env variable set at the workflow level ${{env.name}} "
             - name : env context at job level
               run: echo "The env varible set at the job level ${{env.name_job }}"
+            - name: vars contexts
+              run: echo "Username is ${{ vars.USERNAME }} "
