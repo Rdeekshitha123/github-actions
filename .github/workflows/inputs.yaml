@@ -1,0 +1,13 @@
+name: inputs example
+on:
+    workflow_dispatch:   #can use workflow_call while passing the input to the workflow through action caller
+        inputs:
+            environment:
+                required: true
+                type: string
+jobs:
+    input-example:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Usage of input variables
+              run: echo "Working environment is ${{inputs.environment}}"
