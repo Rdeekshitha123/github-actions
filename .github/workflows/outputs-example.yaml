@@ -1,0 +1,19 @@
+name: outputs example
+on:
+    push
+jobs:
+    welcome:
+        runs-on: ubuntu-latest
+        outputs: #job outputs are declared here
+            name: ${{steps.step1.outputs.NAME}} #access the step output and declaring the output of the job 
+        steps:
+            - id: step1
+              run: echo  "NAME=Charan" >> "$GITHUB_OUTPUT" #way to pass the data out of the step through a file
+    GoodBye:
+        runs-on: ubuntu-latest
+        needs: welcome
+        steps:
+            - run:
+                echo "Bye ${{needs.welcome.outputs.name}}" #access the job outputs from the another job through needs
+
+    
