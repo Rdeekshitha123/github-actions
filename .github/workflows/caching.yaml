@@ -1,0 +1,26 @@
+name: caching
+on: push
+
+jobs:
+  caching:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: npm-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            npm-${{ runner.os }}-
+            npm-
+
+      - name: Install dependencies
+        run: npm install
+
+    
+      - name: Run tests
+        run: npm test
