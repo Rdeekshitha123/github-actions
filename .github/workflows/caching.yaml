@@ -25,7 +25,7 @@ jobs:
             echo "This file is now cached!" > ./my-temp-folder/hello.txt
           fi
 
-      - name: Save cache # to save the cached file after the cache miss
+      - name: Save cache # to save the cached file after the cache miss but in real caching it happens dynamically
         uses: actions/cache@v3
         with:
           path: ./my-temp-folder
