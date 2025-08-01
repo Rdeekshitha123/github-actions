@@ -1,26 +1,32 @@
-name: caching
-on: push
+name: Caching 
+
+on:
+  push
 
 jobs:
-  caching:
+  simple-cache:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Cache node modules
+      - name: Restore cache
         uses: actions/cache@v3
         with:
-          path: ~/.npm
-          key: npm-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            npm-${{ runner.os }}-
-            npm-
+          path: ./my-temp-folder
+          key: test-cache-v1
 
-      - name: Install dependencies
-        run: npm install
+      - name: Create file if cache miss
+        run: |
+          if [ -f ./my-temp-folder/hello.txt ]; then
+            echo " Cache Hit: File exists!"
+            cat ./my-temp-folder/hello.txt
+          else
+            echo " Cache Miss: Creating file..."
+            mkdir -p ./my-temp-folder
+            echo "This file is now cached!" > ./my-temp-folder/hello.txt
+          fi
 
-    
-      - name: Run tests
-        run: npm test
+      - name: Save cache
+        uses: actions/cache@v3
+        with:
+          path: ./my-temp-folder
+          key: test-cache-v1
