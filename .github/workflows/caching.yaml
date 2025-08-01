@@ -8,13 +8,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Restore cache
+      - name: Restore cache    //checks if the cached file is present and tried to restore it
         uses: actions/cache@v3
         with:
           path: ./my-temp-folder
           key: test-cache-v1
 
-      - name: Create file if cache miss
+      - name: Create file if cache miss  //runs only if the cache miss happens
         run: |
           if [ -f ./my-temp-folder/hello.txt ]; then
             echo " Cache Hit: File exists!"
@@ -25,7 +25,7 @@ jobs:
             echo "This file is now cached!" > ./my-temp-folder/hello.txt
           fi
 
-      - name: Save cache
+      - name: Save cache // to save the cached file after the cache miss
         uses: actions/cache@v3
         with:
           path: ./my-temp-folder
