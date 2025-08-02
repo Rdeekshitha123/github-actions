@@ -1,0 +1,31 @@
+name: Artifacts
+
+on:
+    push
+
+jobs:
+  create-file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create file 
+        run: |
+          echo "Hello" > hello.txt
+
+      - name: Upload artifact #upload the artifact to make it available to reuse
+        uses: actions/upload-artifact@v4
+        with:
+          name: example-artifact
+          path: hello.txt
+
+  use-file:
+    needs: create-file
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact #download after gets uploaded and use it
+        uses: actions/download-artifact@v4
+        with:
+          name: example-artifact
+          path: ./downloaded
+
+      - name: Show file content #use fro the downloads
+        run: cat ./downloaded/hello.txt
