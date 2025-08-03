@@ -7,9 +7,13 @@ jobs:
   print-message:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false #continous to run other jobs even if one combination fails in the matrix
       matrix:   #the variation will be based on the cartisian product of the matrices
         os: [ubuntu-latest, windows-latest]
         version: [1.0, 2.0]
+        include: #to add an additional combination or custom combination apart from which is defined in the matrix
+            - os: ubuntu-latest
+              node: 18
 
     steps:
       - name: Print OS and Version
