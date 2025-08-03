@@ -11,10 +11,11 @@ jobs:
       matrix:   #the variation will be based on the cartisian product of the matrices
         os: [ubuntu-latest, windows-latest]
         version: [1.0, 2.0]
-        include: #to add an additional combination or custom combination apart from which is defined in the matrix
-            - os: ubuntu-latest
-              node: 18
+        include: #to add an additional combination or "custom combination" apart from which is defined in the matrix
+            - os: windows-latest
+              version: 3.0
 
     steps:
       - name: Print OS and Version
         run: echo "Running on ${{ matrix.os }} with version ${{ matrix.version }}"
+
